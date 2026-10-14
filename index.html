@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#170f24">
+  <title>Her Special Day ♡</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #120e1b;
+      --panel: #201729;
+      --pink: #f4b8ce;
+      --rose: #d9789f;
+      --cream: #fff1e7;
+      --muted: #c9b9c8;
+      --gold: #e9cf9a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: radial-gradient(ellipse at 50% -10%, #44243f 0, transparent 45%), var(--bg);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      overflow-x: clip;
+    }
+
+    html.countdown-lock,
+    html.countdown-lock body {
+      overflow: hidden;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .stars,
+    .confetti-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff1df;
+      border-radius: 50%;
+      opacity: .5;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      to {
+        opacity: .12;
+        transform: scale(.55);
+      }
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1112px;
+      margin: auto;
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: max(18px, env(safe-area-inset-top));
+      padding-bottom: 18px;
+      color: var(--muted);
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      gap: 12px;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: var(--pink);
+      letter-spacing: .08em;
+    }
+
+    .live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #9ce2b1;
+      box-shadow: 0 0 12px #9ce2b1;
+    }
+
+    .hero {
+      min-height: 75vh;
+      min-height: 75svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: clamp(44px, 8vh, 76px);
+      padding-bottom: clamp(60px, 10vh, 96px);
+      position: relative;
+    }
+
+    .eyebrow {
+      font-size: .72rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    .serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 8.5vw, 7.2rem);
+      line-height: .94;
+      margin: 25px 0;
+      color: var(--cream);
+      overflow-wrap: anywhere;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--pink);
+      font-style: italic;
+    }
+
+    .typing-active::after {
+      content: "";
+      display: inline-block;
+      height: .9em;
+      margin-left: 4px;
+      border-right: 2px solid currentColor;
+      vertical-align: -.08em;
+      animation: blink-caret .8s steps(1) infinite;
+    }
+
+    @keyframes blink-caret {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .subtitle {
+      max-width: 42rem;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: clamp(.92rem, 2.2vw, .98rem);
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: clamp(12px, 3vw, 30px);
+      margin: 35px auto;
+    }
+
+    #countdownLabel[hidden],
+    .countdown[hidden] {
+      display: none;
+    }
+
+    .hero #countdownLabel {
+      display: block;
+    }
+
+    .hero .countdown {
+      display: flex;
+    }
+
+    .time {
+      min-width: 64px;
+    }
+
+    .time strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      font-weight: 500;
+      color: var(--pink);
+    }
+
+    .time span {
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--muted);
+    }
+
+    .btn {
+      border: 1px solid #d9789f80;
+      color: var(--cream);
+      background: #d9789f18;
+      border-radius: 99px;
+      padding: 13px 23px;
+      min-height: 44px;
+      transition: .25s;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .btn:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+      transform: translateY(-2px);
+      color: #1b101b;
+    }
+
+    .btn.primary {
+      background: var(--rose);
+      color: #1b101b;
+      border-color: var(--rose);
+      font-weight: 700;
+    }
+
+    .hint {
+      font-size: .78rem;
+      color: #bba7b8;
+      margin-top: 16px;
+    }
+
+    .section {
+      padding-top: clamp(48px, 7vw, 76px);
+      padding-bottom: clamp(48px, 7vw, 76px);
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.1rem, 6vw, 4rem);
+      margin: 12px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .music-panel {
+      max-width: 700px;
+      margin: auto;
+      padding: clamp(18px, 4vw, 28px);
+      border: 1px solid #f4b8ce30;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #281b2c, #191321);
+      text-align: center;
+    }
+
+    .song-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .song-choice {
+      border: 1px solid #ffffff25;
+      background: #ffffff08;
+      color: var(--muted);
+      padding: 10px 15px;
+      min-height: 44px;
+      border-radius: 99px;
+      font-size: .85rem;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .song-choice.active {
+      border-color: var(--pink);
+      color: var(--pink);
+      background: #f4b8ce12;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .memory {
+      background: var(--panel);
+      border: 1px solid #ffffff12;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .memory:hover {
+      transform: translateY(-5px);
+      border-color: #f4b8ce55;
+    }
+
+    .memory-art {
+      height: clamp(180px, 55vw, 220px);
+      display: grid;
+      place-items: center;
+      font-size: 4rem;
+      background: linear-gradient(145deg, #55304e, #251b36);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memory-art img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .memory-art:after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid #ffffff26;
+      border-radius: 10px;
+    }
+
+    .memory:nth-child(2) .memory-art {
+      background: linear-gradient(145deg, #70444c, #30213c);
+    }
+
+    .memory:nth-child(3) .memory-art {
+      background: linear-gradient(145deg, #4b455f, #261d37);
+    }
+
+    .memory-content {
+      padding: clamp(16px, 4vw, 20px);
+    }
+
+    .memory-content small {
+      color: var(--gold);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .66rem;
+    }
+
+    .memory-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin: 9px 0;
+    }
+
+    .memory-content p {
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .film {
+      max-width: 760px;
+      margin: auto;
+      background: #08070c;
+      border: 1px solid #ffffff20;
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .film-screen {
+      aspect-ratio: 16/9;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      background: radial-gradient(ellipse at center, #422741, #0a0810 70%);
+      position: relative;
+    }
+
+    .film-screen video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-height: 430px;
+      object-fit: contain;
+    }
+
+    .film-screen .play-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #f4b8ce20;
+      border: 1px solid #f4b8ce70;
+      color: var(--pink);
+      font-size: 1.5rem;
+      margin: 0 auto 18px;
+    }
+
+    .film-screen p {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .film-controls {
+      padding: 15px clamp(14px, 4vw, 20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .film-controls #videoStatus {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .letter-card {
+      max-width: 720px;
+      margin: auto;
+      padding: clamp(25px, 6vw, 55px);
+      background: linear-gradient(145deg, #f7e5dc, #e9c8d5);
+      color: #3b2637;
+      border-radius: 5px 28px 5px 28px;
+      box-shadow: 0 20px 70px #0004;
+      position: relative;
+    }
+
+    .letter-card:before {
+      content: "✦";
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      color: #b06a8c;
+      font-size: 1.5rem;
+    }
+
+    .letter-card h2 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      margin-bottom: 20px;
+    }
+
+    .letter-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.08rem, 3vw, 1.25rem);
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .signature {
+      font-style: italic;
+      text-align: right;
+      color: #925775;
+    }
+
+    .birthday {
+      text-align: center;
+      padding: clamp(42px, 8vw, 70px) clamp(16px, 4vw, 20px);
+      background: linear-gradient(180deg, transparent, #28182a80, transparent);
+      border-radius: 28px;
+    }
+
+    .birthday h2 {
+      font-size: clamp(2.25rem, 7vw, 5rem);
+      margin: 15px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .birthday h2 span {
+      color: var(--pink);
+      font-style: italic;
+    }
+
+    .cake {
+      font-size: 4rem;
+      animation: bob 2s ease-in-out infinite;
+    }
+
+    @keyframes bob {
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .tree-wrap {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .tree {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2 / 1;
+      display: block;
+      margin: auto;
+    }
+
+    .tree-copy {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 530px;
+      margin: 10px auto 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding-top: 40px;
+      padding-bottom: max(30px, env(safe-area-inset-bottom));
+      color: #a18b9f;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      overflow-wrap: anywhere;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: #08060bd9;
+      backdrop-filter: blur(8px);
+      z-index: 5;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-box {
+      width: min(520px, 100%);
+      max-height: calc(100vh - 32px);
+      max-height: calc(100dvh - 32px);
+      overflow-y: auto;
+      padding: clamp(24px, 6vw, 35px);
+      text-align: center;
+      border: 1px solid #f4b8ce55;
+      background: #211729;
+      border-radius: 24px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.5rem;
+    }
+
+    .modal-box h2 {
+      font-size: clamp(2rem, 9vw, 2.8rem);
+      color: var(--pink);
+      margin: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px) scale(.985);
+      filter: blur(8px);
+      transition: opacity .8s cubic-bezier(.2, .7, .2, 1),
+        transform .8s cubic-bezier(.2, .7, .2, 1),
+        filter .8s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .confetti {
+      position: fixed;
+      top: -15px;
+      width: 8px;
+      height: 12px;
+      z-index: 9;
+      pointer-events: none;
+      animation: fall 3.2s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 600px) {
+      .nav {
+        padding-top: max(22px, env(safe-area-inset-top));
+        padding-bottom: 22px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .memory:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .wrap {
+        padding-left: max(24px, env(safe-area-inset-left));
+        padding-right: max(24px, env(safe-area-inset-right));
+      }
+
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .memory:first-child {
+        grid-column: auto;
+      }
+
+      .hero {
+        min-height: 82vh;
+        min-height: 82svh;
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <header class="wrap nav">
+    <div class="brand">H<span></span></div>
+    <div class="live"><span class="dot"></span><span id="timezone">WIB · INDONESIA</span></div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">A little universe made for you</div>
+        <h1>Something Special <span>is coming</span></h1>
+        <p class="subtitle">Ada satu hari yang pantas dirayakan lebih istimewa dari hari lainnya. Dan halaman kecil ini
+          dibuat khusus untukmu. </p>
+        <div class="eyebrow" id="countdownLabel">Menghitung hari menuju hari spesialmu</div>
+        <div class="countdown" aria-label="Hitung mundur">
+          <div class="time"><strong id="days">00</strong><span>Hari</span></div>
+          <div class="time"><strong id="hours">00</strong><span>Jam</span></div>
+          <div class="time"><strong id="minutes">00</strong><span>Menit</span></div>
+          <div class="time"><strong id="seconds">00</strong><span>Detik</span></div>
+        </div>
+        <button class="btn primary" id="openGift">Open your little gift <span>✦</span></button>
+        <div class="hint">Sebuah kejutan kecil sedang dipersiapkan untukmu</div>
+      </div>
+    </section>
+
+    <section class="section wrap reveal" id="jukebox">
+      <div class="section-head">
+        <div class="eyebrow">✦ Jukebox ✦</div>
+        <h2>Pilih lagu </h2>
+        <p>Putar lagu yang punya tempat spesial di hatimu.</p>
+      </div>
+      <div class="music-panel">
+        <div style="font-size:2rem">♫</div>
+        <div class="song-list">
+          <button class="song-choice" data-song="none">♡ Tanpa musik</button>
+          <button class="song-choice" data-song="coldplay  - Sparks (Lyrics) - Dan Music.mp3">♪ Sparks</button>
+          <button class="song-choice" data-song="Coldplay - Yellow (Lyrics) - MAYELEVRSE.mp3">♪ Yellow</button>
+          <button class="song-choice" data-song="Merry Christmas, I miss you - Alex Crichton (Lyrics) - miciela.mp3">♪
+            Merry Christmas, I Miss You</button>
+          <button class="song-choice" data-song="Novo Amor - Keep Me (official audio) - Novo Amor.mp3">♪ Keep
+            Me</button>
+          <button class="song-choice" data-song="Perunggu - Ini Abadi (Video Lirik) - Perunggu Official.mp3">♪ Ini
+            Abadi</button>
+          <button class="song-choice"
+            data-song="Phoebe Bridgers - Scott Street (Tiktok Version) (Lyrics) - LBJ DVD.mp3">♪ Scott Street</button>
+          <button class="song-choice"
+            data-song="Taylor Swift - Better Man (Taylor's Version) (From The Vault) (Lyric Video) - Taylor Swift.mp3">♪
+            Better Man</button>
+          <button class="song-choice active" data-song="ssstik.io_1791953019360.mp3">♪ Panasea</button>
+        </div>
+        <audio id="music" loop></audio>
+        <button class="btn" id="musicToggle">▶ Putar musik</button>
+        <p class="small-note" style="margin:16px 0 0"></p>
+      </div>
+    </section>
+
+    <section class="section wrap reveal" id="memories">
+      <div class="section-head">
+        <div class="eyebrow">✦ Our memories ✦</div>
+        <h2>Potongan cerita kita</h2>
+        <p>Beberapa hal mungkin sederhana saat terjadi, tetapi punya tempat tersendiri ketika dikenang.</p>
+      </div>
+      <div class="grid">
+        <article class="memory">
+          <div class="memory-art"><img src="WhatsApp Image 2026-10-14 at 11.02.02.jpeg" alt="Kenangan bersama"></div>
+          <div class="memory-content">
+            <small>Memory no. 01</small>
+            <h3>Awal cerita</h3>
+            <p>heloo salam redaksii, wkwk siapa sangka ya, cerita kita yang awalnya cuma dari kirim sticker kucing bisa
+              bertahan sampe sejauh ini, mungkin awalnya kita sama sama nggak yangka kalau hal kecil itu bisa jadi awal
+              cerita yang masih bisa kita ingat sekarang
+              rasanya baru kemarin kita saling cerita null wkwk, bahas ikan, hiu copel atau bahkan keluh kesah aku, dan
+              mu selalu nanggapin itu semua hehe, sampai dmn masa itu benar benar selesai dan kita mulai jalani
+              kehidupan masing masing di dunia perkulihan, semoga mu tetap punya alasan untup tetap bersenyum
+              yaa,mungkin emang ada hal hal yang baru terasa istimewa setelah waktu berjalan, hal yang dlu kita anggap
+              sederhan kini jadi hal yang bermakna untuk di ingatt, semoga muu dikelilingin hal hal baik yh dan di
+              pertemukan dengan banyak cerita ya indahh.</p>
+          </div>
+        </article>
+        <article class="memory">
+          <div class="memory-art"><img src="WhatsApp Image 2026-10-14 at 11.09.30.jpeg" alt="Kenangan bersama"></div>
+          <div class="memory-content">
+            <small>Memory no. 02</small>
+            <h3>Hari-hari kecil</h3>
+            <p>kalau di ingat" masa waktu di man udh hampir setahun aja yah. foto alkena. angkatan dan pelantikan osis
+              yang dibarengin hujan itu, dan first time fotbar divisi wkwk, malu kalii dan lagi duluu kita dekat kalii
+              yahh wkwk, tiap pulang sekolah chattan tapi kadang aku gak ngabarin sii hehe, biasa orang sibuu wkwkwk
+              bercandaa, cerita tentang mapel,osis,sampe asbun gatau gmn lagi, dlu aku bodoh kali yah huft sampe buat
+              kayak gini, ohh iya dlu tiap kali kita jumpa canggung terud wkwkwk, lucu yaa dmn harii hari yang dlu kita
+              jalani dengen keasbunan bisa ninggalin cerita yang cerita bagi kita, mungkin emang nggak semua harus di
+              ingat soalnya aku dlu cowo bingung level maks kali hehe.</p>
+          </div>
+        </article>
+        <article class="memory">
+          <div class="memory-art"><img src="WhatsApp Image 2026-10-14 at 11.17.22.jpeg" alt="Kenangan bersama"></div>
+          <div class="memory-content">
+            <small>Memory no. 03</small>
+            <h3>Masih banyak cerita</h3>
+            <p>masa sma emang nyimpan banyak cerita yang susah di lupakan, yang dlu kita kira sederhana sekarang menjadi
+              berharga, aku minta maaf ya atas segala sikap kesalahan aku di masa lalu, aku sadar bahwa rasa nyesal
+              gabisa bikin mu baikan, aku gamau bela diri segimana lagi karena aku sadar ini semua kesalahan aku, karena
+              apapun alasan nya itu nggak bisa di jadikan alasan yang bikin keadaan kayak gini semua, jujur aku mau kita
+              kayak dlu lagi, tapi aku sadar kayak gmn yah bukan karena aku udah nggak ngerasa sayang apa gmn , tapi
+              perasaan aku udh nggak pantas buat dapatin ini semua selalu muncul di pikiran aku hehe, aku nggak maksa mu
+              jawab kok, baca aja juga gpp, aku mau ucapin "Selamat Ulang Tahun Yh usnulll.</p>
+          </div>
+        </article>
+      </div>
+      <p class="small-note" style="text-align:center;margin-top:20px">Some moments become memories before we even
+        realize how much they mean.</p>
+    </section>
+
+    <section class="section wrap reveal" id="film">
+      <div class="section-head">
+        <div class="eyebrow">✦ Now showing ✦</div>
+        <h2>Film untukmu</h2>
+        <p></p>
+      </div>
+      <div class="film">
+        <div class="film-screen" id="filmScreen">
+          <video src="videooo web snupi.mp4" controls playsinline preload="metadata" aria-label="Film untukmu"></video>
+        </div>
+        <div class="film-controls">
+          <span>✦ OUR LITTLE MOVIE ✦</span>
+          <span id="videoStatus">videooo web snupi.mp4</span>
+          <label class="btn" for="videoFile">Pilih video lain</label>
+          <input id="videoFile" type="file" accept="video/*" hidden>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap reveal" id="letter">
+      <div class="section-head">
+        <div class="eyebrow">✦ Read my heart ✦</div>
+        <h2>Pesan dari hati</h2>
+        <p>Ada beberapa hal yang ingin kusampaikan di hari inii.</p>
+      </div>
+      <article class="letter-card">
+        <div class="eyebrow" style="color:#925775">To someone ,</div>
+        <h2>Untuk kamu </h2>
+        <p>Selamat bertambah usia, ya. Semoga hal-hal baik semakin dekat denganmu, semoga kamu selalu punya alasan untuk
+          tersenyum, dan semoga langkahmu ke depan dipenuhi keberanian serta ketenangan.</p>
+        <p>Terima kasih sudah menjadi dirimu sendiri. Jangan lupa istirahat saat lelah, bangga pada setiap kemajuan
+          kecil, dan tetap percaya bahwa kamu pantas mendapatkan banyak hal baik.</p>
+        <p>Semoga hari ini menjadi awal dari banyak cerita indah yang menantimu.</p>
+        <p class="signature">Dengan doa dan harapan baik, </p>
+        <button class="btn" id="readMore">Buka pesan rahasia ✦</button>
+      </article>
+    </section>
+
+    <section class="section wrap reveal" id="birthday">
+      <div class="birthday">
+        <div class="cake">🎂</div>
+        <div class="eyebrow">✦ One last surprise ✦</div>
+        <h2>Happy Birthday, <span id="recipientInline">Husnul</span> !</h2>
+        <p class="subtitle">Semoga tahun yang baru dalam hidupmu membawa lebih banyak tawa, ketenangan, keberanian, dan
+          kejutan baik.</p>
+        <button class="btn primary" id="celebrate">Rayakan hari ini ✨</button>
+      </div>
+    </section>
+
+    <section class="section wrap reveal" id="tree">
+      <div class="section-head">
+        <div class="eyebrow">✦ See our love grow ✦</div>
+        <h2>Semoga terus bertumbuh</h2>
+      </div>
+      <div class="tree-wrap">
+        <svg class="tree" viewBox="0 0 600 300" role="img" aria-label="Ilustrasi pohon dengan daun berbentuk hati">
+          <defs>
+            <linearGradient id="trunk" x1="0" x2="1">
+              <stop stop-color="#8d5b66" />
+              <stop offset="1" stop-color="#d7a18c" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M300 280 C292 230 310 192 300 151 C292 125 272 115 257 90 M302 190 C329 160 354 154 370 123 M299 220 C267 194 242 180 226 151 M303 165 C311 130 315 103 304 78"
+            fill="none" stroke="url(#trunk)" stroke-width="12" stroke-linecap="round" />
+          <g fill="#e89ab9">
+            <circle cx="253" cy="80" r="30" />
+            <circle cx="298" cy="63" r="34" />
+            <circle cx="341" cy="83" r="31" />
+            <circle cx="375" cy="116" r="24" />
+            <circle cx="226" cy="140" r="24" />
+            <circle cx="271" cy="128" r="29" />
+            <circle cx="324" cy="118" r="30" />
+            <circle cx="350" cy="150" r="24" />
+            <circle cx="269" cy="165" r="21" />
+          </g>
+          <g fill="#f7d3df">
+            <circle cx="257" cy="71" r="7" />
+            <circle cx="305" cy="52" r="8" />
+            <circle cx="344" cy="77" r="6" />
+            <circle cx="373" cy="108" r="5" />
+            <circle cx="222" cy="135" r="5" />
+            <circle cx="322" cy="111" r="6" />
+          </g>
+          <path d="M190 280 Q300 266 410 280" fill="none" stroke="#a16b81" stroke-width="3" stroke-linecap="round" />
+        </svg>
+        <p class="tree-copy">Semoga kebahagiaanmu terus tumbuh, mimpi-mimpimu menemukan jalan, dan setiap musim hidup
+          mengajarkan sesuatu yang indah. Teruslah mekar dengan caramu sendiri. </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">MADE WITH Z, JUST FOR YOU · <span id="footerYear"></span></footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="close" id="closeModal" aria-label="Tutup">×</button>
+      <div style="font-size:2.3rem">💌</div>
+      <div class="eyebrow">A tiny secret</div>
+      <h2 id="modalTitle">Untuk kamu</h2>
+      <p id="modalText">Semoga kamu selalu dikelilingi orang-orang yang tulus, kesempatan baik, dan alasan untuk
+        bahagia. Terima kasih sudah hadir di dunia. Jangan pernah meremehkan betapa berharganya dirimu. ♡</p>
+      <button class="btn primary" id="modalDone">Simpan di hati ♡</button>
+    </div>
+  </div>
+
+  <div class="confetti-layer" id="confettiLayer"></div>
+
+  <script>
+    // ====== BAGIAN YANG BISA KAMU UBAH ======
+    const CONFIG = {
+      recipientName: "Husnul",             // Ganti dengan nama penerima
+      countdownEnabled: true,
+      birthday: new Date('2026-10-15T00:00:00+07:00'), // 15 Oktober 2026 pukul 00.00 WIB
+      timezoneLabel: "WIB · INDONESIA"
+    };
+    // ========================================
+
+    document.title = `Her Special Day ♡`;
+    document.getElementById('recipientInline').textContent = CONFIG.recipientName;
+    document.getElementById('timezone').textContent = CONFIG.timezoneLabel;
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    const stars = document.getElementById('stars');
+    let countdownCompletionTriggered = false;
+    for (let i = 0; i < 95; i++) {
+      const s = document.createElement('i');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = Math.random() * 4 + 's';
+      s.style.opacity = (.15 + Math.random() * .5).toFixed(2);
+      stars.appendChild(s);
+    }
+
+    function updateCountdown() {
+      const now = new Date(), target = new Date(CONFIG.birthday);
+      let diff = target - now;
+      const waiting = !Number.isNaN(target.getTime()) && diff > 0;
+      document.documentElement.classList.toggle('countdown-lock', waiting);
+      if (waiting && window.scrollY !== 0) window.scrollTo(0, 0);
+      if (Number.isNaN(target.getTime()) || diff <= 0) {
+        if (!Number.isNaN(target.getTime())) {
+          document.querySelector('.hero .eyebrow:nth-child(4)').textContent = 'Hari spesialmu telah tiba';
+        }
+        diff = 0;
+      }
+      const vals = [
+        Math.floor(diff / 86400000),
+        Math.floor(diff / 3600000) % 24,
+        Math.floor(diff / 60000) % 60,
+        Math.floor(diff / 1000) % 60
+      ];
+      ['days', 'hours', 'minutes', 'seconds'].forEach((id, i) =>
+        document.getElementById(id).textContent = String(vals[i]).padStart(2, '0')
+      );
+      if (!Number.isNaN(target.getTime()) && diff === 0 && !countdownCompletionTriggered) {
+        countdownCompletionTriggered = true;
+        document.getElementById('openGift').click();
+        setTimeout(confetti, 600);
+        setTimeout(confetti, 1200);
+      }
+    }
+
+    if (CONFIG.countdownEnabled) {
+      document.getElementById('countdownLabel').hidden = false;
+      document.querySelector('.countdown').hidden = false;
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    const modal = document.getElementById('modal');
+    function openModal(title, text) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalText').textContent = text;
+      modal.classList.add('show');
+    }
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    document.getElementById('openGift').addEventListener('click', () => {
+      if (CONFIG.countdownEnabled && document.documentElement.classList.contains('countdown-lock')) {
+        openModal('Sabar sebentar ♡', 'Hadiah kecilnya bisa dibuka setelah hitung mundur selesai.');
+        return;
+      }
+      document.getElementById('jukebox').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => openModal('A little gift ♡', 'Hadiah ini bukan benda yang bisa dibungkus. Ini pengingat kecil bahwa kamu layak dirayakan, bukan cuma hari ini, tapi juga di hari-hari biasa.'), 450);
+      confetti();
+    });
+
+    document.getElementById('readMore').addEventListener('click', () =>
+      openModal(`Untuk ${CONFIG.recipientName} ♡`, 'Kalau suatu hari semuanya terasa berat, semoga kamu ingat bahwa kamu sudah melewati banyak hal sampai di titik ini. Pelan-pelan saja, tidak perlu selalu sempurna. Semoga kamu selalu punya keberanian untuk mencoba lagi dan hati yang tetap hangat.')
+    );
+
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('modalDone').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    const music = document.getElementById('music'), toggle = document.getElementById('musicToggle');
+    let selectedSong = document.querySelector('.song-choice.active').dataset.song;
+    if (selectedSong !== 'none') {
+      music.src = selectedSong;
+      music.load();
+    }
+
+    document.querySelectorAll('.song-choice').forEach(btn =>
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.song-choice').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedSong = btn.dataset.song;
+        music.pause();
+        toggle.textContent = '▶ Putar musik';
+        if (selectedSong === 'none') {
+          music.removeAttribute('src');
+          music.load();
+          toggle.disabled = true;
+          toggle.textContent = '♫ Musik dimatikan';
+        } else {
+          music.src = selectedSong;
+          music.load();
+          toggle.disabled = false;
+          toggle.textContent = '▶ Putar musik';
+        }
+      })
+    );
+
+    toggle.addEventListener('click', async () => {
+      if (selectedSong === 'none') return;
+      if (music.paused) {
+        try {
+          await music.play();
+          toggle.textContent = 'Ⅱ Jeda musik';
+        } catch (error) {
+          openModal('Lagu tidak bisa diputar', `Pastikan file "${selectedSong}" ada di folder yang sama dengan file HTML dan formatnya didukung browser. Detail: ${error.message}`);
+        }
+      } else {
+        music.pause();
+        toggle.textContent = '▶ Putar musik';
+      }
+    });
+
+    const videoFile = document.getElementById('videoFile'), filmScreen = document.getElementById('filmScreen'), videoStatus = document.getElementById('videoStatus');
+    let currentVideoUrl = null;
+    const firstVideo = filmScreen.querySelector('video');
+    const secondVideo = 'ssstik.io_@iravlana_1791952108735.mp4';
+
+    firstVideo.addEventListener('ended', async () => {
+      firstVideo.src = secondVideo;
+      videoStatus.textContent = secondVideo;
+      try {
+        await firstVideo.play();
+      } catch (error) {
+        openModal('Video berikutnya tidak bisa diputar', `Pastikan file "${secondVideo}" ada di folder yang sama dengan file HTML dan formatnya didukung browser. Detail: ${error.message}`);
+      }
+    });
+
+    videoFile.addEventListener('change', () => {
+      const file = videoFile.files[0];
+      if (!file) return;
+      if (currentVideoUrl) URL.revokeObjectURL(currentVideoUrl);
+      currentVideoUrl = URL.createObjectURL(file);
+      filmScreen.innerHTML = '';
+      const video = document.createElement('video');
+      video.src = currentVideoUrl;
+      video.controls = true;
+      video.playsInline = true;
+      filmScreen.appendChild(video);
+      videoStatus.textContent = file.name;
+    });
+
+    function confetti() {
+      const layer = document.getElementById('confettiLayer');
+      const colors = ['#f4b8ce', '#e9cf9a', '#fff1e7', '#d9789f', '#b9a4dc'];
+      for (let i = 0; i < 95; i++) {
+        const c = document.createElement('i');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.animationDelay = Math.random() * .9 + 's';
+        c.style.transform = `rotate(${Math.random() * 360}deg)`;
+        layer.appendChild(c);
+        setTimeout(() => c.remove(), 4300);
+      }
+    }
+
+    document.getElementById('celebrate').addEventListener('click', () => {
+      confetti();
+      openModal(`Happy Birthday, ${CONFIG.recipientName}! 🎂`, 'Semoga semua doa baik yang kamu simpan perlahan menemukan jalannya. Terus bertumbuh, terus mencoba, dan jangan lupa menikmati perjalananmu. Hari ini adalah tentang kamu. ♡');
+    });
+
+    let letterTypingStarted = false;
+    const observer = new IntersectionObserver(entries =>
+      entries.forEach(entry => {
+        entry.target.classList.toggle('visible', entry.isIntersecting);
+        if (entry.isIntersecting && entry.target.id === 'letter' && !letterTypingStarted) {
+          letterTypingStarted = true;
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const typingElements = [...entry.target.querySelectorAll('.letter-card .eyebrow, .letter-card h2, .letter-card p')];
+            const typingTexts = typingElements.map(element => element.textContent);
+            typingElements.forEach((element, index) => {
+              element.setAttribute('aria-label', typingTexts[index]);
+              element.textContent = '';
+            });
+
+            function typeText(elementIndex, characterIndex = 0) {
+              const element = typingElements[elementIndex];
+              const text = typingTexts[elementIndex];
+              if (characterIndex === 0) element.classList.add('typing-active');
+              if (characterIndex < text.length) {
+                element.textContent += text.charAt(characterIndex);
+                setTimeout(() => typeText(elementIndex, characterIndex + 1), 30);
+              } else {
+                element.classList.remove('typing-active');
+                if (elementIndex + 1 < typingElements.length) typeText(elementIndex + 1);
+              }
+            }
+
+            if (typingElements.length) typeText(0);
+          }
+        }
+      }), { threshold: .12 }
+    );
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
